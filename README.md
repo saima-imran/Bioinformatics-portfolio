@@ -1,32 +1,37 @@
-# Comprehensive Analysis of lncRNA and circRNA Mediated ceRNA Network in Psoriasis
-
-**Author:** Saima Imran  
-**Institution:** University of Skövde, Sweden  
-**Degree:** M.Sc. in Informatics — Bioinformatics (60 ECTS)  
-**Supervisor:** Zelmina Lubovac  
-**Dataset:** GSE145305 (NCBI GEO)  
 # Bioinformatics Portfolio — Saima Imran
 
-**M.Sc. Bioinformatics | Data Coordinator | Precision Medicine**  
-📧 saimaimran4822@hotmail.com | 📍 Gothenburg, Sweden  
-🔗 [GitHub Profile](https://github.com/saima-imran)
+**M.Sc. Bioinformatics | Data Coordinator | Precision Medicine**
+
+📧 saimaimran4822@hotmail.com | 📍 Gothenburg, Sweden | 🔗 [GitHub](https://github.com/saima-imran)
 
 ---
 
 ## About This Portfolio
 
-This repository contains two complete bioinformatics analysis projects developed using R and public genomics data from NCBI GEO. Both projects demonstrate end-to-end data science pipelines including data retrieval, preprocessing, statistical analysis, and publication-quality visualisation — all following FAIR data principles.
+This repository contains three complete bioinformatics analysis projects developed in R using publicly available genomics data from NCBI GEO. Each project demonstrates a full end-to-end data science pipeline including data retrieval, preprocessing, statistical analysis, and publication-quality visualisation — all following FAIR data principles.
+
+The projects span three disease areas relevant to precision medicine and data-driven life science: **psoriasis**, **breast cancer**, and **diabetes mellitus**.
 
 ---
 
-## Projects
+## Portfolio Overview
 
-### Project 1 — Psoriasis ceRNA Network Analysis
-**Dataset:** GSE145305 | **Disease:** Psoriasis vs Healthy Skin
+| Project | Dataset | Disease | Samples | Key Output |
+|---------|---------|---------|---------|------------|
+| 1 | GSE145305 | Psoriasis vs Healthy | 14 | ceRNA network |
+| 2 | GSE45827 | Breast Cancer Subtypes | 155 | Subtype classification |
+| 3 | GSE15932 | Diabetes vs Normal | 32 | Precision biomarkers |
 
-This project is based on my M.Sc. thesis in Bioinformatics at the University of Skövde, Sweden. It investigates the competing endogenous RNA (ceRNA) regulatory network in psoriasis using multi-omics microarray data.
+---
 
-**Analysis pipeline:**
+## Project 1 — Psoriasis ceRNA Network Analysis
+
+**Dataset:** GSE145305 | **Platform:** Affymetrix HTA-2.0 + miRNA-4 Arrays
+
+This project is based on my M.Sc. thesis in Bioinformatics at the University of Skövde, Sweden. It investigates the competing endogenous RNA (ceRNA) regulatory network in psoriasis — a chronic autoimmune skin disease — using multi-omics microarray data integrating mRNA, miRNA, lncRNA and circRNA.
+
+### Analysis Pipeline
+
 ```
 NCBI GEO (GSE145305)
         ↓
@@ -41,14 +46,14 @@ Network construction — Cytoscape, STRING, cytoHubba
 Pathway analysis — clueGO
 ```
 
-**Key results:**
+### Key Results
 
 | RNA Type | Up-regulated | Down-regulated | Threshold |
 |----------|-------------|----------------|-----------|
 | mRNA | 86 genes | 10 genes | p<0.05, \|logFC\|>2 |
 | miRNA | 75 miRNAs | 48 miRNAs | p<0.05, \|logFC\|>1.5 |
 
-**Hub genes identified:**
+### Hub Genes Identified
 
 | Type | Genes |
 |------|-------|
@@ -56,50 +61,93 @@ Pathway analysis — clueGO
 | Hub circRNA | DSC2, GAN, HEPHL1, IFI44L, HK1, STAT1 |
 | Hub PPI module | CCNB1, DLGAP5, ANLN, KPNA2, STAT1, OAS2, IFI44L, EIF2AK2 |
 
-**Figures generated:**
+### Figures
 
 | Figure | Description |
 |--------|-------------|
-| `01_mRNA_boxplot.png` | Quality control — expression distribution across samples |
+| `01_mRNA_boxplot.png` | Quality control — expression distribution |
 | `02_mRNA_volcano.png` | Volcano plot — significant DEGs in psoriasis |
 | `03_heatmap_top30_DEGs.png` | Heatmap — top 30 differentially expressed genes |
 
 ---
 
-### Project 2 — Breast Cancer Gene Expression Analysis
-**Dataset:** GSE45827 | **Disease:** Breast Cancer Subtypes
+## Project 2 — Breast Cancer Gene Expression Analysis
 
-This project analyses gene expression differences across breast cancer subtypes using public microarray data. The analysis focuses on Triple Negative Breast Cancer (Basal/TNBC) vs Normal tissue — directly relevant to precision oncology and personalised medicine.
+**Dataset:** GSE45827 | **Platform:** Affymetrix Human Genome Array
 
-**Cancer subtypes analysed:**
+This project analyses gene expression differences across five breast cancer subtypes using public microarray data. The analysis focuses on Triple Negative Breast Cancer (Basal/TNBC) versus Normal tissue — one of the most aggressive and difficult to treat cancer subtypes. This project is directly relevant to precision oncology and personalised medicine.
 
-| Subtype | Samples | Colour |
-|---------|---------|--------|
-| Basal (TNBC) | 41 | 🔴 Red |
-| HER2-enriched | 30 | 🟡 Orange |
-| Luminal A | 29 | 🔵 Blue |
-| Luminal B | 30 | 🟣 Purple |
-| Normal | 11 | 🟢 Green |
+### Cancer Subtypes
 
-**Key results — Basal (TNBC) vs Normal:**
+| Subtype | Samples | Clinical Significance |
+|---------|---------|----------------------|
+| Basal (TNBC) | 41 | Most aggressive — no targeted therapy |
+| HER2-enriched | 30 | HER2 positive — targeted by trastuzumab |
+| Luminal A | 29 | Best prognosis — hormone receptor positive |
+| Luminal B | 30 | Intermediate prognosis |
+| Normal | 11 | Healthy breast tissue control |
 
-| Direction | Count | Threshold |
-|-----------|-------|-----------|
-| Up in Basal | 4,383 genes | p<0.05, logFC>1.5 |
-| Down in Basal | 1,967 genes | p<0.05, logFC<-1.5 |
-| Total significant | 6,350 genes | — |
+### Key Results — Basal (TNBC) vs Normal
 
-**Figures generated:**
+| Direction | Count | Biological Meaning |
+|-----------|-------|-------------------|
+| Up in Basal | 4,383 genes | Oncogenes, proliferation markers |
+| Down in Basal | 1,967 genes | Tumour suppressors, differentiation |
+| Total significant | 6,350 genes | p<0.05, \|logFC\|>1.5 |
+
+### Figures
 
 | Figure | Description |
 |--------|-------------|
 | `01_BC_expression_boxplot.png` | Colourful boxplot — expression by cancer subtype |
-| `02_BC_volcano_Basal_vs_Normal.png` | Volcano plot — TNBC vs Normal tissue |
+| `02_BC_volcano_Basal_vs_Normal.png` | Volcano plot — TNBC vs Normal |
 | `03_BC_heatmap_top40_genes.png` | Heatmap — top 40 DEGs across all subtypes |
+| `04_BC_PCA_subtypes.png` | PCA — sample clustering by cancer subtype |
+
+### Scientific Insight
+
+The PCA plot reveals clear separation between Normal tissue and all cancer subtypes, with Basal (TNBC) forming the most distinct cluster — consistent with its unique molecular profile and aggressive clinical behaviour. Luminal A and B show partial overlap, reflecting their shared hormone receptor positivity.
 
 ---
 
-## Tools and Packages
+## Project 3 — Diabetes Mellitus Precision Medicine Analysis
+
+**Dataset:** GSE15932 | **Platform:** Affymetrix Human Genome Array
+
+This project investigates gene expression differences in pancreatic islet tissue between diabetic patients and healthy controls. Identifying key genes dysregulated in diabetes mellitus contributes to biomarker discovery and personalised treatment strategies — a core goal of precision medicine. The dataset includes three patient groups enabling multi-group comparison.
+
+### Patient Groups
+
+| Group | Samples | Description |
+|-------|---------|-------------|
+| Cancer + Diabetes | 8 | Pancreatic cancer with diabetes |
+| Diabetes Only | 8 | Pure diabetes mellitus |
+| Normal | 8 | Healthy pancreatic tissue |
+| Other | 8 | Additional controls |
+
+### Key Results — Diabetes vs Normal
+
+| Direction | Count | Biological Meaning |
+|-----------|-------|-------------------|
+| Up in Diabetes | 7,264 genes | Inflammatory, stress response pathways |
+| Down in Diabetes | 3,287 genes | Insulin secretion, beta cell function |
+| Total significant | 10,551 genes | p<0.05, \|logFC\|>1.5 |
+
+### Figures
+
+| Figure | Description |
+|--------|-------------|
+| `01_Diabetes_volcano.png` | Volcano plot — Diabetes vs Normal |
+| `02_Diabetes_heatmap.png` | Heatmap — top 40 dysregulated genes |
+| `03_Diabetes_PCA.png` | PCA — separation of patient groups |
+
+### Precision Medicine Relevance
+
+The large number of significantly dysregulated genes (10,551) reflects the complex molecular landscape of diabetes mellitus. Key pathways affected include insulin signalling, beta cell apoptosis, and inflammatory response — all critical targets for precision diabetes therapy and personalised treatment selection.
+
+---
+
+## Technical Stack
 
 ### R Packages
 
@@ -109,10 +157,10 @@ This project analyses gene expression differences across breast cancer subtypes 
 | `oligo` | Read and preprocess CEL files |
 | `limma` | Differential expression analysis |
 | `pheatmap` | Professional heatmap visualisation |
-| `ggplot2` | Data visualisation |
+| `ggplot2` | Publication quality visualisation |
 | `ggrepel` | Non-overlapping gene labels |
-| `RColorBrewer` | Colour palettes |
-| `tidyverse` | Data manipulation |
+| `RColorBrewer` | Scientific colour palettes |
+| `tidyverse` | Data manipulation and wrangling |
 
 ### External Tools
 
@@ -128,7 +176,7 @@ This project analyses gene expression differences across breast cancer subtypes 
 
 | Database | Purpose |
 |----------|---------|
-| NCBI GEO | Raw microarray data |
+| NCBI GEO | Raw microarray datasets |
 | miRDip v4.1 | miRNA target predictions |
 | StarBase | miRNA-lncRNA interactions |
 | CircBase | circRNA database |
@@ -140,24 +188,29 @@ This project analyses gene expression differences across breast cancer subtypes 
 ## Repository Structure
 
 ```
-bioinformatics-portfolio/
+psoriasis-ceRNA-network/
 │
-├── 01_psoriasis_analysis.R          # Complete psoriasis pipeline
-├── 02_breast_cancer_analysis.R      # Complete breast cancer pipeline
+├── 01_psoriasis_analysis.R          
+├── 02_breast_cancer_analysis.R      
+├── 03_diabetes_analysis.R           
 │
-├── results/
-│   ├── figures/
-│   │   ├── 01_mRNA_boxplot.png
-│   │   ├── 02_mRNA_volcano.png
-│   │   ├── 03_heatmap_top30_DEGs.png
-│   │   └── breast_cancer/
-│   │       ├── 01_BC_expression_boxplot.png
-│   │       ├── 02_BC_volcano_Basal_vs_Normal.png
-│   │       └── 03_BC_heatmap_top40_genes.png
-│   └── data/
-│       ├── mRNA_DEGs.csv
-│       ├── miRNA_DEMs.csv
-│       └── BreastCancer_DEGs_Basal_vs_Normal.csv
+├── Thesis_copy_Bioinformatics.pdf   
+│
+├── Psoriasis figures/
+│   ├── 01_mRNA_boxplot.png
+│   ├── 02_mRNA_volcano.png
+│   └── 03_heatmap_top30_DEGs.png
+│
+├── Breast Cancer figures/
+│   ├── 01_BC_expression_boxplot.png
+│   ├── 02_BC_volcano_Basal_vs_Normal.png
+│   ├── 03_BC_heatmap_top40_genes.png
+│   └── 04_BC_PCA_subtypes.png
+│
+├── Diabetes figures/
+│   ├── 01_Diabetes_volcano.png
+│   ├── 02_Diabetes_heatmap.png
+│   └── 03_Diabetes_PCA.png
 │
 └── README.md
 ```
@@ -172,266 +225,80 @@ bioinformatics-portfolio/
 - Internet connection
 
 ### Installation
+
 ```r
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
-BiocManager::install(c("GEOquery", "oligo", "limma"))
+BiocManager::install(c("GEOquery", "oligo", "limma", "Biobase"))
 
-install.packages(c("tidyverse", "ggplot2", "ggrepel", 
+install.packages(c("tidyverse", "ggplot2", "ggrepel",
                    "pheatmap", "RColorBrewer"))
 ```
 
 ### Run Analysis
-```r
-# Project 1 — Psoriasis
-source("01_psoriasis_analysis.R")
 
-# Project 2 — Breast Cancer
+```r
+source("01_psoriasis_analysis.R")
 source("02_breast_cancer_analysis.R")
+source("03_diabetes_analysis.R")
 ```
 
 ---
 
 ## FAIR Data Principles
 
-Both projects strictly follow FAIR data principles:
+All three projects strictly follow FAIR data principles:
 
 | Principle | Implementation |
 |-----------|---------------|
-| **Findable** | All data sourced from NCBI GEO with persistent accession numbers |
-| **Accessible** | Raw data publicly available — no access restrictions |
-| **Interoperable** | Standard file formats (CSV, PNG) and documented workflows |
-| **Reusable** | Fully reproducible pipelines with documented methods and thresholds |
+| **Findable** | All data from NCBI GEO with persistent accession numbers |
+| **Accessible** | Raw data publicly available with no restrictions |
+| **Interoperable** | Standard formats (CSV, PNG) and documented workflows |
+| **Reusable** | Fully reproducible pipelines with documented methods |
 
 ---
 
-## Education & Background
+## Education
 
 | Degree | Institution | Year |
 |--------|-------------|------|
 | M.Sc. Bioinformatics (60 ECTS) | University of Skövde, Sweden | 2022 |
 | M.Phil. Computer Science | University of Lahore, Pakistan | 2011 |
 | Master of Computer Science | Bahauddin Zakariya University, Pakistan | 2008 |
+| B.Sc. Computer Science, Physics & Statistics | Islamia University Bahawalpur, Pakistan | 2005 |
 
-**Certifications:**
-- Microsoft Azure AI Fundamentals (AI-900)
-- Microsoft Azure Cloud Fundamentals (AZ-900)
-- Power BI Data Analyst (PL-300 — in progress)
-- Microsoft Learn: Level 6 | 31,825 XP | 20 Badges
+**Swedish Credential Assessment (UHR):** Degrees assessed equivalent to Swedish Master's in Computer Science — Ref: 322-15001-21
+
+## Certifications
+
+| Certification | Provider | Status |
+|---------------|----------|--------|
+| Azure AI Fundamentals (AI-900) | Microsoft | Completed |
+| Azure Cloud Fundamentals (AZ-900) | Microsoft | Completed |
+| Power BI Data Analyst (PL-300) | Microsoft | In Progress |
+| Microsoft Learn | Microsoft | Level 6 — 31,825 XP — 20 Badges |
 
 ---
 
 ## Contact
 
-**Saima Imran**  
-M.Sc. Bioinformatics | Data Coordinator | Precision Medicine  
-📧 saimaimran4822@hotmail.com  
-📍 Gothenburg, Sweden  
+**Saima Imran**
+M.Sc. Bioinformatics | Data Coordinator | Precision Medicine
+📧 saimaimran4822@hotmail.com
+📍 Gothenburg, Sweden
 🔗 [GitHub](https://github.com/saima-imran)
 
 ---
 
 ## References
 
-**Project 1 — Psoriasis:**
+**Project 1:**
 > Imran, S. (2022). *Comprehensive Analysis of lncRNA and circRNA Mediated ceRNA Network in Psoriasis*. M.Sc. thesis, University of Skövde, Sweden.
 
-**Project 2 — Breast Cancer:**
-> Dataset: GSE45827. Breast cancer gene expression profiling. NCBI GEO. Available at: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE45827
----
+**Project 2:**
+> GSE45827. Breast cancer gene expression profiling by array. NCBI GEO. https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE45827
 
-## Project Overview
+**Project 3:**
+> GSE15932. Gene expression in pancreatic islets from donors with and without type 2 diabetes. NCBI GEO. https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE15932
 
-This repository contains the complete bioinformatics analysis pipeline developed for my Master's thesis in Bioinformatics. The project investigates the role of **competing endogenous RNA (ceRNA) networks** in psoriasis by analysing lncRNA and circRNA mediated regulatory mechanisms using multi-omics microarray data.
-
-Psoriasis is a chronic autoimmune skin disease. The ceRNA hypothesis suggests that lncRNAs and circRNAs can act as molecular sponges for miRNAs, thereby regulating mRNA expression. This project computationally identifies key ceRNA interactions that may serve as therapeutic targets for psoriasis.
-
----
-
-## Dataset
-
-| Property | Details |
-|----------|---------|
-| **GEO Accession** | GSE145305 |
-| **Platform (mRNA)** | GPL17586 — Affymetrix HTA-2_0 Array |
-| **Platform (miRNA)** | GPL19117 — Affymetrix miRNA-4 Array |
-| **mRNA Samples** | 6 (3 Psoriasis + 3 Healthy Control) |
-| **miRNA Samples** | 8 (4 Psoriasis + 4 Healthy Control) |
-| **Data Access** | Publicly available — FAIR compliant |
-
----
-
-## Analysis Pipeline
-
-```
-GSE145305 (NCBI GEO)
-        │
-        ▼
-01_data_preprocessing.R
-   ├── CEL file reading (oligo)
-   ├── RMA normalisation
-   └── Quality control boxplots
-        │
-        ▼
-02_differential_expression.R
-   ├── Linear modelling (limma)
-   ├── Empirical Bayes moderation
-   ├── Volcano plots
-   └── DEG/DEM identification
-        │
-        ▼
-03_mirna_target_prediction.R
-   ├── Opposite expression pairing
-   ├── miRNAtap target prediction
-   └── Cytoscape edge list export
-        │
-        ▼
-Cytoscape (external)
-   ├── ceRNA network construction
-   ├── Hub gene identification (cytoHubba)
-   └── PPI network (STRING plugin)
-        │
-        ▼
-Biological Interpretation
-   ├── Hub lncRNAs: XIST, NEAT1, KCNQ1OT1, MALAT1
-   ├── Hub circRNAs: DSC2, GAN, HEPHL1, IFI44L
-   └── Pathway analysis (clueGO)
-```
-
----
-
-## Key Results
-
-### Differentially Expressed mRNA
-| Regulation | Count | Threshold |
-|-----------|-------|-----------|
-| Up-regulated | 86 genes | logFC > 2, p < 0.05 |
-| Down-regulated | 10 genes | logFC < -2, p < 0.05 |
-
-**Top up-regulated genes:** SERPINB4, SERPINB3, PI3, S100A9, DEFB4B  
-**Top down-regulated genes:** XIST, FLG2, FLG, CDR1, DUSP1
-
-### Differentially Expressed miRNA
-| Regulation | Count | Threshold |
-|-----------|-------|-----------|
-| Up-regulated | 75 miRNAs | logFC > 1.5, p < 0.05 |
-| Down-regulated | 48 miRNAs | logFC < -1.5, p < 0.05 |
-
-### Hub Genes Identified
-| Type | Hub Genes |
-|------|----------|
-| Hub lncRNA | XIST, NEAT1, KCNQ1OT1, MALAT1, HCG18, NORAD |
-| Hub circRNA | DSC2, GAN, HEPHL1, IFI44L, HK1, STAT1 |
-| Hub PPI module | CCNB1, DLGAP5, ANLN, KPNA2, STAT1, OAS2, IFI44L, EIF2AK2 |
-
----
-
-## Tools and Packages
-
-### R Packages
-| Package | Purpose | Version |
-|---------|---------|---------|
-| `GEOquery` | Download GEO datasets | Bioconductor |
-| `oligo` | Read CEL files | Bioconductor |
-| `limma` | Differential expression | Bioconductor |
-| `miRNAtap` | miRNA target prediction | Bioconductor |
-| `EnhancedVolcano` | Volcano plots | Bioconductor |
-| `clueGO` | Pathway analysis | Cytoscape plugin |
-
-### External Tools
-| Tool | Purpose |
-|------|---------|
-| Cytoscape | Network visualisation |
-| cytoHubba | Hub node identification |
-| STRING plugin | PPI network |
-| MCODE plugin | Module detection |
-
-### Databases Used
-- NCBI GEO — raw microarray data
-- miRDip v4.1 — miRNA target predictions
-- StarBase — miRNA-lncRNA interactions
-- CircBase — circRNA database
-- LncBase — lncRNA-miRNA interactions
-- STRING — protein-protein interactions
-
----
-
-## Repository Structure
-
-```
-psoriasis-ceRNA-network/
-│
-├── 01_data_preprocessing.R      # GEO download + RMA normalisation
-├── 02_differential_expression.R # limma DEG analysis + volcano plots
-├── 03_mirna_target_prediction.R # miRNAtap target prediction
-│
-├── results/
-│   ├── figures/                 # All generated plots
-│   └── data/                    # Processed data files
-│       └── target_prediction/   # miRNA-mRNA interaction tables
-│
-└── README.md
-```
-
----
-
-## How to Run
-
-### Requirements
-- R version ≥ 4.0
-- RStudio (recommended)
-- Internet connection (for GEO download)
-
-### Installation
-```r
-# Install Bioconductor
-if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-# Install all required packages
-BiocManager::install(c(
-  "GEOquery", "oligo", "limma", 
-  "miRNAtap", "miRNAtap.db",
-  "EnhancedVolcano", "Biobase"
-))
-
-install.packages(c("tidyverse", "ggplot2", "ggrepel"))
-```
-
-### Execution Order
-```bash
-# Run scripts in order
-Rscript 01_data_preprocessing.R
-Rscript 02_differential_expression.R
-Rscript 03_mirna_target_prediction.R
-```
-
----
-
-## FAIR Data Principles
-
-This project follows FAIR (Findable, Accessible, Interoperable, Reusable) data principles:
-
-- **Findable** — Data sourced from NCBI GEO with persistent accession number (GSE145305)
-- **Accessible** — All raw data is publicly available with no access restrictions
-- **Interoperable** — Standard file formats (CEL, CSV) and documented workflows
-- **Reusable** — Fully reproducible pipeline with documented methods and thresholds
-
----
-
-## Contact
-
-**Saima Imran**  
-M.Sc. Bioinformatics | Data Coordinator | Precision Medicine  
-📧 saimaimran4822@hotmail.com  
-🔗 GitHub: [saima-imran](https://github.com/saima-imran)  
-📍 Gothenburg, Sweden  
-
----
-
-## Citation
-
-If you use this pipeline in your research, please cite:
-
-> Imran, S. (2022). *Comprehensive Analysis of lncRNA and circRNA Mediated ceRNA Network in Psoriasis*. Master's thesis, University of Skövde, Sweden.
